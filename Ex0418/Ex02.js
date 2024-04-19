@@ -7,6 +7,14 @@ const url = require("url");
 
 
 http.createServer(function(request, response){
+    // 요청 방식 확인 : request.method
+    if (request.method == 'GET'){
+        console.log('GET')
+    }
+    else if (request.method == 'POST'){
+        console.log('POST')
+    }
+
     // request : 요청 정보
     // function(req, res)로 적어줘도 됨. 순서가 중요함
 
@@ -27,7 +35,7 @@ http.createServer(function(request, response){
     // url.parse(request.url, true) --> 쿼리스트링 부분만 사용하겠습니다 
     // console.log(url.parse(request.url, true))
 
-    let query = url.parse(request.url, true).query
+    let query = url.parse(request.url, true).query  // -> true라고 적으면 객체형식으로 나옴
     // console.log(query)   => {data : '123'}
     console.log(query.data)
 
