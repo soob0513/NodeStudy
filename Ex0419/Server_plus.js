@@ -3,10 +3,13 @@ const http = require("http");
 const url = require("url");
 
 http.createServer(function(req, res){
+    // request : 프론트 / response: 백엔드 서버
     // console.log(req.url)
 
     // 문자열로 된 쿼리스트링을 객체 형식으로 변환
     let query = url.parse(req.url, true).query;
+    // --> parse : 변형 (컴퓨터언어 <-> 사람언어)
+    // req.url을 parse(쪼개주세요) query형태로!
 
     /* 
     let num1 = Number(query.data);
