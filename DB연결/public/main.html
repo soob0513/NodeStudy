@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>DB에 접근해서 데이터를 조회, 삽입, 삭제</h1>
+    <button onclick="selectData()">데이터 조회</button>
+    <button>데이터 삽입</button>
+    <button>데이터 삭제</button>
+
+    <script>
+        const selectData = ()=>{
+            console.log("DB 조회 실행");
+            // 비동기 방식으로 node에게 데이터를 요청
+            // router에게 특정 경로로 접근하면, DB에 들어가서 데이터를 꺼내와!
+            // ajax(쿼리스트링), axios(리액트), fetch(js) 
+            let url = "http://localhost:3000/select"
+            fetch(url).then((res)=>res.json()).then((res)=> console.log(res));
+        }
+    </script>
+</body>
+</html>
