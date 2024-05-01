@@ -39,14 +39,23 @@ router.get("/select", (req, res)=>{
 })
 
 // 3. insert router 생성
+/* get 방식
 router.get("/insert", (req,res)=>{
-    let sql = "insert into nodejs_member values ('smhrd', '123', 'Minsu')"
-    conn.query(sql, (err,rows)=>{
+    //  1. 데이터 삽입
+    // let sql = "insert into nodejs_member values ('smhrd', '123', 'Minsu')"
+
+    // 2. 회원가입
+    // http://localhost:3000/insert?id=id&pw=pw&nick=nick
+    console.log(req.query)
+    // let sql = `insert into nodejs_member values ('${req.query.id}','${req.query.pw}',' ${req.query.nick}')`
+    let sql = `insert into nodejs_member values (?,?,?)`
+
+    conn.query(sql, [req.query.id, req.query.pw, req.query.nick], (err,rows)=>{
         // rows -> 쿼리문 실행 정보
         // affectedRows -> 영향을 받은 행의 개수
+
         console.log("insert 성공", rows); 
         // res.send(rows);
-        
         if (rows.affectedRows>0){
             // 클라이언트한테 삽입 성공! 응답 
             res.send({data:"성공!"})
@@ -55,11 +64,37 @@ router.get("/insert", (req,res)=>{
             // 클라이언트한테 삽입 실패! 응답
             res.send({data:"실패!"})
         }
+
+    })
+})
+*/
+
+// POST 방식
+router.post("/insert", (req,res)=>{
+    console.log(req.body);
+    let sql = `insert into nodejs_member values (?,?,?)`
+
+    conn.query(sql, [req.query.id, req.query.pw, req.query.nick], (err,rows)=>{
+        // rows -> 쿼리문 실행 정보
+        // affectedRows -> 영향을 받은 행의 개수
+
+        console.log("insert 성공", rows); 
+        // res.send(rows);
+        if (rows.affectedRows>0){
+            // 클라이언트한테 삽입 성공! 응답 
+            res.send({data:"성공!"})
+        }
+        else {
+            // 클라이언트한테 삽입 실패! 응답
+            res.send({data:"실패!"})
+        }
+
     })
 })
 
 // 4. delete
 router.get("/delete", (req, res)=>{
+    /*
     let sql = "delete from nodejs_member where id = 'smhrd'";
     conn.query(sql, (err, rows)=>{
         console.log("delete 완료", rows);  // -> 터미널에 출력됨
@@ -70,6 +105,21 @@ router.get("/delete", (req, res)=>{
         }
         else {
             // 삭제 실패
+            res.send({data:0})
+        }
+    })
+    */
+    
+    // 2. 입력한 ID에 해당하는 회원삭제
+    console.log(req.query);
+    // req.query => {id : deleteID}
+    let sql = `delete from nodejs_member where id =?`
+
+    conn.query(sql, [req.query.id], (err, rows)=>{
+        if (rows.affectedRows>0){
+            res.send({data:1})        
+        }
+        else {
             res.send({data:0})
         }
     })

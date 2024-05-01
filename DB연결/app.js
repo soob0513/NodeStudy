@@ -12,5 +12,11 @@ const express = require("express");
 const app = express();
 const router = require("./routes/router");
 
+// 회원가입 insert
+// 넘겨받은 데이터를 사용할 수 있게끔 허용해주겠다
+app.use(express.urlencoded({extended:true}));
+// 넘겨받은 데이터를 JSON (Key-value) 형태로 사용하겠다 
+app.use(express.json());
+
 app.use(router);
 app.listen(3000);
