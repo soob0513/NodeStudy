@@ -50,16 +50,20 @@
             // fetch(url).then((res)=>res.json()).then((res)=>console.log("insert"));
 
             // post 방식
-            let url = "http://localhost:3000"
+            let url = "http://localhost:3000/insert"
             fetch(url,{
                 method:"POST",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify({id:"test"})
+                // 데이터를 JSON 객체로 변환해서 body 안에 담아주겠다
+                body:JSON.stringify({
+                    id:id,
+                    pw:pw,
+                    nick:nick})
             })
-            .then((res)=>res.json()).then((res)=>console.log("insert"));
+            .then((res)=>res.json()).then((res)=>console.log("insert",res));
             
         }
 

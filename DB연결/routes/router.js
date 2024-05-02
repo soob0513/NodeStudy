@@ -71,10 +71,11 @@ router.get("/insert", (req,res)=>{
 
 // POST 방식
 router.post("/insert", (req,res)=>{
+    // post 방식은 body 영역에 데이터가 담긴다!
     console.log(req.body);
     let sql = `insert into nodejs_member values (?,?,?)`
 
-    conn.query(sql, [req.query.id, req.query.pw, req.query.nick], (err,rows)=>{
+    conn.query(sql, [req.body.id, req.body.pw, req.body.nick], (err,rows)=>{
         // rows -> 쿼리문 실행 정보
         // affectedRows -> 영향을 받은 행의 개수
 
