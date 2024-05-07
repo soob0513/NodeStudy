@@ -33,22 +33,36 @@ router.post('/handlejoin', (req,res)=>{
     })
 })
 
-// 로그인
-router.post('/handleLogin', (req, res)=>{
-    // console.log("로그인 시도", req.body)
+// 로그인을 담당하는 경로 (기능)
+router.post('/handlelogin', (req, res)=>{
+    console.log("handle login router", req.body);
+    
     let {id, pw} = req.body;
     let sql = `select id, nick from nodejs_member where id = ? and pw = ?`
-
+    // conn.query(sq;, [], ()=>{})
     conn.query(sql, [id, pw], (err, rows)=>{
+        // console.log('rows', rows);
         console.log(rows[0].id);
+
+        /*
         let nick = rows[0].nick;
         if (rows[0].id != null){
-            res.json({result : "success"})
+            res.json({result : "success", nick : nick})
         }
         else {
             res.json({result: "failed"})
         }
+        */
+
+        if (rows.length > 0) {
+            res.json(rows[0]);
+        }
+        else {
+            res.json({result : "failed"});
+        }
+        
     })
+    
 
 })
 
